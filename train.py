@@ -29,7 +29,7 @@ def argument():
 
 # ファイルから1文字単位の列とラベルを取得
 def letter_list(fname):
-    with open(fname) as f:
+    with open(fname, encoding='utf8') as f:
         for l in f:
             body = l[:-3]
             val = int(l[-2])
@@ -67,20 +67,20 @@ class Vocabulary:
         self.append_letter('<unk>')
         self.append_letter('<s>')
         self.append_letter('</s>')
-        with open(self.fname) as f:
+        with open(self.fname, encoding='utf8') as f:
             for line in f:
                 nline = line[:-3]
                 for l in nline:
                     self.append_letter(l)
 
     def save_vocab(self, filename):
-        with open(filename, 'w') as f:
+        with open(filename, 'w', encoding='utf8') as f:
             for l in self.i2l:
                 f.write(l + "\n")
     @staticmethod
     def load_from_file(filename):
         vocab = Vocabulary(None)
-        with open(filename) as f:
+        with open(filename, encoding='utf8') as f:
             for l in f:
                 l = l[:-1]
                 vocab.append_letter(l)
